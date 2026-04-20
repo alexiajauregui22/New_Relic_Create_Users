@@ -18,7 +18,8 @@ pipeline {
             steps {
                 script {
                     sh "python3 -c \"import base64; open('input.csv','wb').write(base64.b64decode('${params.INPUT_FILE}'))\""
-                    def lines = sh(script: "python3 -c \"import csv; r=csv.reader(open('input.csv','r',encoding='latin-1'),delimiter=';'); next(r); [print(';'.join(row[:5])) for row in r if any(row)]\"", returnStdout: true).trim().split('\n')
+                    def lines = sh(script: "python3 -c \"import csv; r=csv.reader(open('input.csv','r',encoding='latin-1'),delimiter=','); next(r); [print(','.join(row[:5])) for row in r if any(row)]\"", returnStdout: true).trim().split('\n')
+
                     env.USUARIOS = lines.join('\n')
                     echo "📋 ${lines.size()} usuarios"
                 }
@@ -35,7 +36,7 @@ pipeline {
                     def lines = env.USUARIOS.split('\n')
                     def stats = [invited:0, existing:0, newGroups:0, skipped:0, newRelic:0, failed:0]
                     lines.each { line ->
-                        def cols = line.split(';')
+                        def cols = line.split(',')
                         if (cols.size() < 5) return
                         def nombre      = cols[0].trim()
                         def apellido    = cols[1].trim()
