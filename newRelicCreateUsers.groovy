@@ -43,7 +43,7 @@ pipeline {
                         def apellido    = cols[1].trim()
                         def email       = cols[2].trim()
                         def ticket      = cols[3].trim()
-                        def grupoId     = cols[4]?.trim()
+                        
                         def displayName = "${nombre} ${apellido}".trim()
 
                         echo "\n👤 ${displayName} | 📧 ${email} | 🎫 ${ticket}"
