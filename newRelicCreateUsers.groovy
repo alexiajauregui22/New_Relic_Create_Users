@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     sh "python3 -c \"import base64; open('input.csv','wb').write(base64.b64decode('${params.INPUT_FILE}'))\""
-                    def lines = sh(script: "python3 -c \"import csv; [print(';'.join(r[:5])) for r in csv.reader(open('input.csv','r',encoding='latin-1'),delimiter=';')][1:]\"", returnStdout: true).trim().split('\n')
+                    def lines = sh(script: "python3 -c \"import csv; r=csv.reader(open('input.csv','r',encoding='latin-1'),delimiter=';'); next(r); [print(';'.join(row[:5])) for row in r if any(row)]\"", returnStdout: true).trim().split('\n')
                     env.USUARIOS = lines.join('\n')
                     echo "📋 ${lines.size()} usuarios"
                 }
