@@ -37,7 +37,8 @@ pipeline {
                     def stats = [invited:0, existing:0, newGroups:0, skipped:0, newRelic:0, failed:0]
                     lines.each { line ->
                         def cols = line.split(',')
-                        if (cols.size() < 5) return
+                        if (cols.size() < 4) return
+                        def grupoId = cols.size() >= 5 ? cols[4]?.trim() : ''
                         def nombre      = cols[0].trim()
                         def apellido    = cols[1].trim()
                         def email       = cols[2].trim()
