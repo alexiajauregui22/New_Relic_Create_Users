@@ -38,12 +38,12 @@ pipeline {
                     lines.each { line ->
                         def cols = line.split(',')
                         if (cols.size() < 4) return
-                        def grupoId = cols.size() >= 5 ? cols[4]?.trim() : ''
+            
                         def nombre      = cols[0].trim()
                         def apellido    = cols[1].trim()
                         def email       = cols[2].trim()
                         def ticket      = cols[3].trim()
-                        
+                        def grupoId = cols.size() >= 5 ? cols[4]?.trim() : ''
                         def displayName = "${nombre} ${apellido}".trim()
 
                         echo "\n👤 ${displayName} | 📧 ${email} | 🎫 ${ticket}"
