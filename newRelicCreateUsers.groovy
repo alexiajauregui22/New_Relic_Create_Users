@@ -138,7 +138,7 @@ pipeline {
                             ).trim()
 
                             if (yaEnNewRelic) {
-                                echo "   ⏭️  Ya asignado a New Relic, se omite"
+                                echo "   ⏭️  Ya asignado a New Relic, entonces se omite"
                             } else {
                                 def assignResult = sh(
                                     script: """
